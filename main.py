@@ -21,7 +21,7 @@ async def on_ready():
     await robloxgameclient_loop.start()
 
 # RobloxGameClient
-@tasks.loop(seconds=600)
+@tasks.loop(seconds=int(con.Seconds))
 async def robloxgameclient_loop():
     os.chdir("RoUpdates-Revamped")
     file = open("Version.txt", "r")
