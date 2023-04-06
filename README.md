@@ -17,9 +17,9 @@ Recommended Python Versions: Python 3.7.0 (3.7.0+), Python 3.8.0 (3.8.0+), Pytho
 
 Download RoUpdates-Revamped from [Releases](https://github.com/Raumfahrzeug420/RoUpdates-Revamped/releases) or clone this repository.
 
-Install the required dependencies: ```pip install Discord```
-
 Create a Discord Bot: https://discord.com/developers/applications
+
+Install the required dependencies: ```pip install Discord```
 
 Edit the Config: ```config.py```
 
