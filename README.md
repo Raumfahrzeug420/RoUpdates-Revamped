@@ -1,7 +1,7 @@
 # RoUpdates-Revamped
 Credits go to MirayXS https://github.com/MirayXS/RoUpdates
 
-If you wan't to contact me: Pakyu!#6228
+If you want to contact me: Pakyu!#6228
 
 # Changes Made
 Instead of comparing the version to the pastebin it will compare to a version folder. This version folder will update automatically. You don't need to configure it.
