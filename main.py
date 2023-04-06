@@ -31,7 +31,6 @@ async def robloxgameclient_loop():
     print(f"Checking for Roblox Update...")
     if oldData == "":
         print("[EMPTY] ( [X] ) Version.txt is Empty Will Set to the Latest Version.")
-        os.chdir("RoUpdates-Revamped")
         with open("Version.txt", "w") as file:
             file.write(str(newData.text))
     elif str(newData.text) in oldData: # if the new data is the same as the old data...
@@ -49,7 +48,6 @@ async def robloxgameclient_loop():
             await channel.send(f"||<@&@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
         else:
             await channel.send(f"||<@&{str(con.RoleID)}>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
-        os.chdir("RoUpdates-Revamped")
         with open("Version.txt", "w") as file:
              file.write(str(newData.text))
     file.close
