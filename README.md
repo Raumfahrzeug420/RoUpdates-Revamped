@@ -15,7 +15,7 @@ Minimum Python Versions: Python 3.5.3 (3.5.3+), Python 3.5.5 (3.5.5+), Python 3.
 
 Recommended Python Versions: Python 3.7.0 (3.7.0+), Python 3.8.0 (3.8.0+), Python 3.9.0 (3.9.0+)
 
-Download RoUpdates-Revamped from [Releases](https://github.com/Raumfahrzeug420/RoUpdates-Revamped/releases/tag/V1) or clone this repository.
+Download RoUpdates-Revamped from [Releases](https://github.com/Raumfahrzeug420/RoUpdates-Revamped/releases) or clone this repository.
 
 Install the required dependencies: pip install Discord
 
