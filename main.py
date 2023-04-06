@@ -20,25 +20,6 @@ async def on_ready():
     print('-------------------------------------\n\n')
     await robloxgameclient_loop.start()
 
-# Use this command to ping the bot, or to know if the bot crashed.  
-@client.command(pass_context=True)
-async def ping(ctx):
-	await ctx.send("> `Pong! " + str(round(client.latency * 1000)) + "ms`")
-
-@client.command(pass_context=True)
-async def version(ctx):
-    newData = requests.get('http://setup.roblox.com/version')
-    await ctx.send(f"Latest Version: {newData.text}")
-
-@client.tree.command(name="ping")
-async def ping(interaction: discord.Interaction):
-    await interaction.response.send_message("> `Pong! " + str(round(client.latency * 1000)) + "ms`")
-
-@client.tree.command(name="version")
-async def ping(interaction: discord.Interaction):
-    newData = requests.get('http://setup.roblox.com/version')
-    await interaction.response.send_message(f"Latest Version: {newData.text}")
-
 # RobloxGameClient
 @tasks.loop(seconds=600)
 async def robloxgameclient_loop():
@@ -47,6 +28,7 @@ async def robloxgameclient_loop():
     fileread = file.readlines()
     oldData = "".join(str(x) for x in fileread)
     newData = requests.get('http://setup.roblox.com/version') # This is the endpoint where Roblox updates their version number. This is new data.
+    print(f"Checking for Roblox Update...")
     if oldData == "":
         print("[EMPTY] ( [X] ) Version.txt is Empty Will Set to the Latest Version.")
         os.chdir("RoUpdates-Revamped")
@@ -71,7 +53,25 @@ async def robloxgameclient_loop():
         with open("Version.txt", "w") as file:
              file.write(str(newData.text))
     file.close
-        
+
+# Use this command to ping the bot, or to know if the bot crashed.  
+@client.command(pass_context=True)
+async def ping(ctx):
+	await ctx.send("> `Pong! " + str(round(client.latency * 1000)) + "ms`")
+
+@client.command(pass_context=True)
+async def version(ctx):
+    newData = requests.get('http://setup.roblox.com/version')
+    await ctx.send(f"Latest Version: {newData.text}")
+
+@client.tree.command(name="ping")
+async def ping(interaction: discord.Interaction):
+    await interaction.response.send_message("> `Pong! " + str(round(client.latency * 1000)) + "ms`")
+
+@client.tree.command(name="version")
+async def ping(interaction: discord.Interaction):
+    newData = requests.get('http://setup.roblox.com/version')
+    await interaction.response.send_message(f"Latest Version: {newData.text}")
 
 # RobloxGameClient - before_loop
 @robloxgameclient_loop.before_loop
@@ -79,4 +79,3 @@ async def before_some_task():
   await client.wait_until_ready()
 
 client.run(con.Token)
-
