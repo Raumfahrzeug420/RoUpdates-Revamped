@@ -23,7 +23,6 @@ async def on_ready():
 # RobloxGameClient
 @tasks.loop(seconds=int(con.Seconds))
 async def robloxgameclient_loop():
-    os.chdir("RoUpdates-Revamped")
     file = open("Version.txt", "r")
     fileread = file.readlines()
     oldData = "".join(str(x) for x in fileread)
