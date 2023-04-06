@@ -2,37 +2,54 @@ import requests
 import discord
 import os
 from discord.ext import tasks, commands
-from discord.utils import get
-from discord.ext.commands import check, MissingRole, CommandError
 import Config as con
 intents = discord.Intents.all()
-client = commands.Bot(command_prefix=".",intents=intents)
+client = commands.Bot(command_prefix=";",intents=intents)
 
 print("Original Code Created by: MirayXS/Shin#6327 Edited by Pakyu!#6228")
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Game(name="Checking for Roblox Updates 10min Intervals"))
+    await client.change_presence(activity=discord.Game(name=f"Checking for Roblox Updates 10min Intervals"))
+    try:
+        await client.tree.sync()
+    except Exception as Error:
+        print(Error)
     print('<----------- NEW SESSION ----------->')
     print('[SUCCESS] : Logged in as ' + format(client.user))
     print('-------------------------------------\n\n')
     await robloxgameclient_loop.start()
 
-# Use this command to ping the bot, or to know if the bot crashed.
+# Use this command to ping the bot, or to know if the bot crashed.  
 @client.command(pass_context=True)
 async def ping(ctx):
 	await ctx.send("> `Pong! " + str(round(client.latency * 1000)) + "ms`")
+
+@client.command(pass_context=True)
+async def version(ctx):
+    newData = requests.get('http://setup.roblox.com/version')
+    await ctx.send(f"Latest Version: {newData.text}")
+
+@client.tree.command(name="ping")
+async def ping(interaction: discord.Interaction):
+    await interaction.response.send_message("> `Pong! " + str(round(client.latency * 1000)) + "ms`")
+
+@client.tree.command(name="version")
+async def ping(interaction: discord.Interaction):
+    newData = requests.get('http://setup.roblox.com/version')
+    await interaction.response.send_message(f"Latest Version: {newData.text}")
 
 # RobloxGameClient
 @tasks.loop(seconds=600)
 async def robloxgameclient_loop():
     os.chdir("RoUpdates-Revamped")
-    with open("Version.txt", "r") as file:
-        file.readlines()
-        oldData = "".join(str(x) for x in file)
+    file = open("Version.txt", "r")
+    fileread = file.readlines()
+    oldData = "".join(str(x) for x in fileread)
     newData = requests.get('http://setup.roblox.com/version') # This is the endpoint where Roblox updates their version number. This is new data.
     if oldData == "":
         print("[EMPTY] ( [X] ) Version.txt is Empty Will Set to the Latest Version.")
+        os.chdir("RoUpdates-Revamped")
         with open("Version.txt", "w") as file:
             file.write(str(newData.text))
     elif str(newData.text) in oldData: # if the new data is the same as the old data...
@@ -45,9 +62,12 @@ async def robloxgameclient_loop():
         print("-------------------------------------")
         channel = client.get_channel(int(con.Channel))
         if con.RoleID == "":
-            await channel.send("@everyone" + "\n```Roblox has been updated!!!" + "\nPrevious Version: " + oldData + "\nUpdated Version: " + newData.text + "```")
+            await channel.send(f"||<@&@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
+        elif con.RoleID == "PASTE HERE":
+            await channel.send(f"||<@&@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
         else:
-            await channel.send("||<@&" + str(con.RoleID) + ">||" + "\n```Roblox has been updated!!!" + "\nPrevious Version: " + oldData + "\nUpdated Version: " + newData.text + "```")
+            await channel.send(f"||<@&{str(con.RoleID)}>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
+        os.chdir("RoUpdates-Revamped")
         with open("Version.txt", "w") as file:
              file.write(str(newData.text))
     file.close
@@ -59,3 +79,4 @@ async def before_some_task():
   await client.wait_until_ready()
 
 client.run(con.Token)
+
