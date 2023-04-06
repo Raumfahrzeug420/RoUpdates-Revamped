@@ -19,7 +19,7 @@ Download RoUpdates-Revamped from [Releases](https://github.com/Raumfahrzeug420/R
 
 Install the required dependencies: ```pip install Discord```
 
-Create a Discord Bot: ```https://discord.com/developers/applications```
+Create a [Discord Bot](https://discord.com/developers/applications): https://discord.com/developers/applications
 
 Edit the Config: ```config.py```
 
