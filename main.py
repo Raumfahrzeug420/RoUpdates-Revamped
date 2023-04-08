@@ -1,6 +1,5 @@
 import requests
 import discord
-import os
 from discord.ext import tasks, commands
 from Config import Token, Channel, RoleID, Seconds
 intents = discord.Intents.all()
