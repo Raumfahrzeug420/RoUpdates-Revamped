@@ -10,7 +10,7 @@ print("Original Code Created by: MirayXS/Shin#6327 Edited by Pakyu!#6228")
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Game(name=f"Checking for Roblox Updates 10min Intervals"))
+    await client.change_presence(activity=discord.Game(name=f"Checking for Roblox Updates {con.Seconds}sec Intervals"))
     try:
         await client.tree.sync()
     except Exception as Error:
