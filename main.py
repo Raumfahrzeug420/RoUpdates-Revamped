@@ -2,7 +2,7 @@ import requests
 import discord
 import os
 from discord.ext import tasks, commands
-import Config as con
+from Config import Token, Channel, RoleID, Seconds
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=";",intents=intents)
 
@@ -10,7 +10,7 @@ print("Original Code Created by: MirayXS/Shin#6327 Edited by Pakyu!#6228")
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Game(name=f"Checking for Roblox Updates {con.Seconds}sec Intervals"))
+    await client.change_presence(activity=discord.Game(name=f"Checking for Roblox Updates {Seconds}sec Intervals"))
     try:
         await client.tree.sync()
     except Exception as Error:
@@ -21,7 +21,7 @@ async def on_ready():
     await robloxgameclient_loop.start()
 
 # RobloxGameClient
-@tasks.loop(seconds=int(con.Seconds))
+@tasks.loop(seconds=int(Seconds))
 async def robloxgameclient_loop():
     file = open("Version.txt", "r")
     fileread = file.readlines()
@@ -40,13 +40,13 @@ async def robloxgameclient_loop():
         print("-------------------------------------")
         print("Old RobloxGameClient Version: "+oldData)
         print("-------------------------------------")
-        channel = client.get_channel(int(con.Channel))
-        if con.RoleID == "":
+        channel = client.get_channel(int(Channel))
+        if RoleID == "":
             await channel.send(f"||<@&@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
-        elif con.RoleID == "PASTE HERE":
+        elif RoleID == "PASTE HERE":
             await channel.send(f"||<@&@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
         else:
-            await channel.send(f"||<@&{str(con.RoleID)}>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
+            await channel.send(f"||<@&{str(RoleID)}>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
         with open("Version.txt", "w") as file:
              file.write(str(newData.text))
     file.close
@@ -75,4 +75,4 @@ async def ping(interaction: discord.Interaction):
 async def before_some_task():
   await client.wait_until_ready()
 
-client.run(con.Token)
+client.run(Token)
