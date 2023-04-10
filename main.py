@@ -51,23 +51,14 @@ async def robloxgameclient_loop():
     file.close
 
 # Use this command to ping the bot, or to know if the bot crashed.  
-@client.command(pass_context=True)
+@client.hybrid_command(pass_context=True)
 async def ping(ctx):
 	await ctx.send("> `Pong! " + str(round(client.latency * 1000)) + "ms`")
 
-@client.command(pass_context=True)
+@client.hybrid_command(pass_context=True)
 async def version(ctx):
     newData = requests.get('http://setup.roblox.com/version')
     await ctx.send(f"Latest Version: {newData.text}")
-
-@client.tree.command(name="ping")
-async def ping(interaction: discord.Interaction):
-    await interaction.response.send_message("> `Pong! " + str(round(client.latency * 1000)) + "ms`")
-
-@client.tree.command(name="version")
-async def ping(interaction: discord.Interaction):
-    newData = requests.get('http://setup.roblox.com/version')
-    await interaction.response.send_message(f"Latest Version: {newData.text}")
 
 # RobloxGameClient - before_loop
 @robloxgameclient_loop.before_loop
