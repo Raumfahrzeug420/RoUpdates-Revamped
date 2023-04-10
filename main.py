@@ -1,9 +1,9 @@
 import requests
 import discord
 from discord.ext import tasks, commands
-from Config import Token, Channel, RoleID, Seconds
+from Config import Token, Channel, RoleID, Seconds, Prefix
 intents = discord.Intents.all()
-client = commands.Bot(command_prefix=";",intents=intents)
+client = commands.Bot(command_prefix=Prefix,intents=intents)
 
 print("Original Code Created by: MirayXS/Shin#6327 Edited by Pakyu!#6228")
 
