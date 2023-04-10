@@ -38,7 +38,7 @@ async def robloxgameclient_loop():
         with open("Version.txt", "w") as file:
                 file.write(str(newData.text))
     elif str(newData.text) in str(oldData): # if the new data is the same as the old data...
-        print("[CLEARED] ( [✓] ) No New RobloxGameClient Version!")
+        print("[CLEARED] ( [✓] ) No New RobloxGameClient Version!\n")
     elif str(newData.text) not in str(oldData): # if the new data is **not** the same as the old data...
         print("[FAILED] ( [X] ) New RobloxGameClient Version!\n")
         print("New RobloxGameClient Version: "+ newData.text)
