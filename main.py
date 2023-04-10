@@ -6,6 +6,11 @@ from Config import Token, Channel, RoleID, Seconds, Prefix
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=str(Prefix),intents=intents)
 
+dir = os.path.dirname(os.path.realpath(__file__))
+wdir = os.getcwd()
+if dir != wdir:
+    os.chdir(dir)
+
 print("Original Code Created by: MirayXS/Shin#6327 Edited by Pakyu!#6228")
 
 @client.event
@@ -24,10 +29,6 @@ async def on_ready():
 @tasks.loop(seconds=int(Seconds))
 async def robloxgameclient_loop():
     print(f"Checking for Roblox Update...")
-    dir = os.path.dirname(os.path.realpath(__file__))
-    wdir = os.getcwd()
-    if dir != wdir:
-        os.chdir(dir)
     file = open("Version.txt", "r")
     fileread = file.readlines()
     oldData = "".join(str(x) for x in fileread)
