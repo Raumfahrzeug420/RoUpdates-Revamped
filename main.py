@@ -51,9 +51,7 @@ async def robloxgameclient_loop():
         print("Old RobloxGameClient Version: "+ oldData)
         print("-------------------------------------")
         channel = client.get_channel(int(Channel))
-        if RoleID == "":
-            await channel.send(f"||<@&@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
-        elif RoleID == "PASTE HERE":
+        if RoleID == "" or RoleID == "PASTE HERE":
             await channel.send(f"||<@&@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
         else:
             await channel.send(f"||<@&{str(RoleID)}>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
