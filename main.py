@@ -5,6 +5,7 @@ from discord.ext import tasks, commands
 from Config import Token, Channel, RoleID, Seconds, Prefix
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=str(Prefix),intents=intents)
+Seconds = int(Seconds)
 
 dir = os.path.dirname(os.path.realpath(__file__))
 wdir = os.getcwd()
@@ -15,7 +16,11 @@ print("Original Code Created by: MirayXS/Shin#6327 Edited by Pakyu!#6228")
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Game(name=f"Checking for Roblox Updates {Seconds}sec Intervals"))
+    if Seconds < 60:
+        await client.change_presence(activity=discord.Game(name=f"Checking for Roblox Updates {Seconds}sec Intervals"))
+    else:
+        min = (Seconds // 60)
+        await client.change_presence(activity=discord.Game(name=f"Checking for Roblox Updates {min}min Intervals"))
     try:
         await client.tree.sync()
     except Exception as Error:
@@ -26,7 +31,7 @@ async def on_ready():
     await robloxgameclient_loop.start()
 
 # RobloxGameClient
-@tasks.loop(seconds=int(Seconds))
+@tasks.loop(seconds=Seconds)
 async def robloxgameclient_loop():
     print(f"Checking for Roblox Update...")
     file = open("Version.txt", "r")
