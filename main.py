@@ -1,4 +1,11 @@
-import os
+import os, platform
+def clear():
+    if platform.system().lower()=="windows":
+        os.system('cls')
+    else:
+        os.system('clear')
+os.system("python3 -m pip install discord"), clear()
+os.system("python3 -m pip install requests"), clear()
 import requests
 import discord
 from discord.ext import tasks, commands
