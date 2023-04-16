@@ -6,8 +6,7 @@ def clear():
         os.system('clear')
 os.system("python3 -m pip install discord"), clear()
 os.system("python3 -m pip install requests"), clear()
-import requests
-import discord
+import requests, discord
 from discord.ext import tasks, commands
 from Config import Token, Channel, RoleID, Seconds, Prefix
 intents = discord.Intents.all()
