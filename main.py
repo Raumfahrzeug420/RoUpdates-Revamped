@@ -4,9 +4,18 @@ def clear():
         os.system('cls')
     else:
         os.system('clear')
-os.system("python3 -m pip install discord"), clear()
-os.system("python3 -m pip install requests"), clear()
-import requests, discord
+
+if platform.system().lower()=="windows":
+    ossys = "python.exe -m pip install"
+else:
+    ossys = "python3 -m pip install"
+
+try:
+    import discord, requests
+except ImportError:
+    os.system(f"{ossys} discord requests"), clear()
+import requests
+import discord
 from discord.ext import tasks, commands
 from Config import Token, Channel, RoleID, Seconds, Prefix
 intents = discord.Intents.all()
