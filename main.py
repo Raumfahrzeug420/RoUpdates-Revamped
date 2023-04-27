@@ -10,6 +10,11 @@ if platform.system().lower()=="windows":
 else:
     ossys = "python3 -m pip install"
 
+dir = os.path.dirname(os.path.realpath(__file__))
+wdir = os.getcwd()
+if dir != wdir:
+    os.chdir(dir)
+
 try:
     import discord, requests
 except ImportError:
@@ -17,17 +22,23 @@ except ImportError:
 import requests
 import discord
 from discord.ext import tasks, commands
-from Config import Token, Channel, RoleID, Seconds, Prefix
+if str(os.path.exists("config.py")) == "False":
+    print("config.py not detected! \n Creating config.py.")
+    Token = input("Token: ")
+    Channel = input("Channel: ")
+    RoleID = input("(If empty will @everyone) RoleID: ")
+    Seconds = input("(In seconds how often bot will check for updates) Seconds: ")
+    Prefix = input("Prefix: ")
+    with open("config.py", "w") as file:
+        file.write(f'Token = "{Token}" \nChannel = "{Channel}" \nRoleID = "{RoleID}" \nSeconds = "{Seconds}" \nPrefix = "{Prefix}"')
+    file.close
+from config import Token, Channel, RoleID, Seconds, Prefix
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=str(Prefix),intents=intents)
 Seconds = int(Seconds)
 
-dir = os.path.dirname(os.path.realpath(__file__))
-wdir = os.getcwd()
-if dir != wdir:
-    os.chdir(dir)
-
 print("Original Code Created by: MirayXS/Shin#6327 Edited by Pakyu!#6228")
+print("To change the config delete config.py or edit it!")
 
 @client.event
 async def on_ready():
@@ -66,10 +77,10 @@ async def robloxgameclient_loop():
         print("Old RobloxGameClient Version: "+ oldData)
         print("-------------------------------------")
         channel = client.get_channel(int(Channel))
-        if RoleID == "" or RoleID == "PASTE HERE":
-            await channel.send(f"||<@&@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
+        if RoleID == "":
+            await channel.send(f"||<@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
         else:
-            await channel.send(f"||<@&{str(RoleID)}>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
+            await channel.send(f"||<@{str(RoleID)}>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
         with open("Version.txt", "w") as file:
             file.write(str(newData.text))
     file.close
