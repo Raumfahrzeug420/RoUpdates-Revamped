@@ -32,6 +32,10 @@ if str(os.path.exists("config.py")) == "False":
     with open("config.py", "w") as file:
         file.write(f'Token = "{Token}" \nChannel = "{Channel}" \nRoleID = "{RoleID}" \nSeconds = "{Seconds}" \nPrefix = "{Prefix}"')
     file.close
+if str(os.path.exists("version.txt")) == "False":
+    with open("version.txt", "w") as file:
+        file.write("")
+    file.close
 from config import Token, Channel, RoleID, Seconds, Prefix
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=str(Prefix),intents=intents)
@@ -59,15 +63,15 @@ async def on_ready():
 # RobloxGameClient
 @tasks.loop(seconds=Seconds)
 async def robloxgameclient_loop():
-    print(f"Checking for Roblox Update...")
-    file = open("Version.txt", "r")
+    print("Checking for Roblox Update...")
+    file = open("version.txt", "r+")
     fileread = file.readlines()
     oldData = "".join(str(x) for x in fileread)
     newData = requests.get('http://setup.roblox.com/version') # This is the endpoint where Roblox updates their version number. This is new data. 
     if oldData == "":
         print("[EMPTY] ( [X] ) Version.txt is Empty Will Set to the Latest Version.")
         with open("Version.txt", "w") as file:
-                file.write(str(newData.text))
+            file.write(str(newData.text))
     elif str(newData.text) in str(oldData): # if the new data is the same as the old data...
         print("[CLEARED] ( [✓] ) No New RobloxGameClient Version!\n")
     elif str(newData.text) not in str(oldData): # if the new data is **not** the same as the old data...
@@ -81,7 +85,7 @@ async def robloxgameclient_loop():
             await channel.send(f"||<@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
         else:
             await channel.send(f"||<@{str(RoleID)}>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
-        with open("Version.txt", "w") as file:
+        with open("version.txt", "w") as file:
             file.write(str(newData.text))
     file.close
 
