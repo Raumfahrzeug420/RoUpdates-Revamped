@@ -1,14 +1,17 @@
 # RoUpdates-Revamped
+
 Credits go to [MirayXS](https://github.com/MirayXS) https://github.com/MirayXS/RoUpdates
 
 If you want to contact me: Pakyu!#6228
 
 # Changes Made
+
 Instead of comparing the version to the pastebin it will compare to a version text file. This version text file will update automatically. You don't need to make changes to it. Added two slash commands. /version and /ping
 
 # SelfHosting from RoUpdates.py
 
 Download the python from [Releases](https://github.com/Raumfahrzeug420/RoUpdates-Revamped/releases)
+
 Or clone this repository. CMD: ```git clone https://github.com/Raumfahrzeug420/RoUpdates-Revamped```
 
 RoUpdates requires Python 3.9.0 or greater. If you need Python 3.9.0+.
