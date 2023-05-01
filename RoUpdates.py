@@ -36,7 +36,7 @@ if str(os.path.exists("version.txt")) == "False":
     with open("version.txt", "w") as file:
         file.write("")
     file.close
-from config import Token, Channel, RoleID, Seconds, Prefix
+from config import *
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=str(Prefix),intents=intents)
 Seconds = int(Seconds)
