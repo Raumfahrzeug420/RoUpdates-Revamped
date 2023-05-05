@@ -10,9 +10,7 @@ Instead of comparing the version to the pastebin it will compare to a version te
 
 # SelfHosting from RoUpdates.py
 
-Download the python from [Releases](https://github.com/Raumfahrzeug420/RoUpdates-Revamped/releases)
-
-Or clone this repository. CMD: ```git clone https://github.com/Raumfahrzeug420/RoUpdates-Revamped```
+Clone this repository. CMD: ```git clone https://github.com/Raumfahrzeug420/RoUpdates-Revamped```
 
 RoUpdates requires Python 3.9.0 or greater. If you need Python 3.9.0+.
 
@@ -23,8 +21,3 @@ Recommended Python Versions: Python 3.7.0 (3.7.0+), Python 3.8.0 (3.8.0+), Pytho
 Create a Discord Bot: https://discord.com/developers/applications
 
 Start the bot from the python file: ```RoUpdates.py```
-
-# EXECUTABLE
-
-Download the executable from [Releases](https://github.com/Raumfahrzeug420/RoUpdates-Revamped/releases)
-Start the bot from ```RoUpdates.exe```
