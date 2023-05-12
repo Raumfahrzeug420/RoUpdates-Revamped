@@ -39,6 +39,7 @@ if str(os.path.exists("version.txt")) == "False":
 from config import *
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=str(Prefix),intents=intents)
+client.remove_command("help")
 Seconds = int(Seconds)
 
 print("Original Code Created by: MirayXS/Shin#6327 Edited by Pakyu!#6228")
@@ -80,24 +81,42 @@ async def robloxgameclient_loop():
         print("-------------------------------------")
         print("Old RobloxGameClient Version: "+ oldData)
         print("-------------------------------------")
+
+        embed=discord.Embed(title="Roblox Has Updated!", color=0xff0000)
+        embed.add_field(name=f"Roblox has Updated to {newData.text}", value=f"From {oldData}", inline=False)
+
         channel = client.get_channel(int(Channel))
         if RoleID == "":
-            await channel.send(f"||<@everyone>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
+            await channel.send("||@everyone||")
+            await channel.send(embed=embed)
         else:
-            await channel.send(f"||<@{str(RoleID)}>|| \n```Roblox has been updated!!! \nPrevious Version: {oldData} \nUpdated Version: {newData.text}```")
+            await channel.send(f"||@{str(RoleID)}||")
+            await channel.send(embed=embed)
         with open("version.txt", "w") as file:
             file.write(str(newData.text))
     file.close
 
 # Use this command to ping the bot, or to know if the bot crashed.  
-@client.hybrid_command(pass_context=True)
+@client.hybrid_command(pass_context=True, description="Pings the Bot")
 async def ping(ctx):
 	await ctx.send("> `Pong! " + str(round(client.latency * 1000)) + "ms`")
 
-@client.hybrid_command(pass_context=True)
+@client.hybrid_command(pass_context=True, description="Grabs the Latest Version of Roblox")
 async def version(ctx):
     newData = requests.get('http://setup.roblox.com/version')
     await ctx.send(f"Latest Version: {newData.text}")
+
+@client.hybrid_command(pass_context=True, description="Sends Bot Prefix")
+async def prefix(ctx):
+    await ctx.send(f"My prefix is: {Prefix}")
+
+async def help(ctx):
+    embed=discord.Embed(title="Help!", color=0xff0000)
+    embed.add_field(name="/ping", value="Sends a ping to the bot. It'll respond with how long it took to respond.", inline=False)
+    embed.add_field(name="/prefix", value="Grabs the server's prefix.", inline=False)
+    embed.add_field(name="/version", value="Sends the latest version of Roblox.", inline=False)
+    embed.add_field(name="Prefix?", value=f'"{Prefix}"" "/"', inline=False)
+    await ctx.send(embed=embed)
 
 # RobloxGameClient - before_loop
 @robloxgameclient_loop.before_loop
