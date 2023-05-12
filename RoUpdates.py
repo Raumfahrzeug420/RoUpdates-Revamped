@@ -82,7 +82,7 @@ async def robloxgameclient_loop():
         print("Old RobloxGameClient Version: "+ oldData)
         print("-------------------------------------")
 
-        embed=discord.Embed(title="Roblox Has Updated!", color=0xff0000)
+        embed=discord.Embed(title="Roblox Has Updated!")
         embed.add_field(name=f"Roblox has Updated to {newData.text}", value=f"From {oldData}", inline=False)
 
         channel = client.get_channel(int(Channel))
@@ -110,8 +110,9 @@ async def version(ctx):
 async def prefix(ctx):
     await ctx.send(f"My prefix is: {Prefix}")
 
+@client.hybrid_command(pass_context=True, description="Helpful Information About Commands")
 async def help(ctx):
-    embed=discord.Embed(title="Help!", color=0xff0000)
+    embed=discord.Embed(title="Help!")
     embed.add_field(name="/ping", value="Sends a ping to the bot. It'll respond with how long it took to respond.", inline=False)
     embed.add_field(name="/prefix", value="Grabs the server's prefix.", inline=False)
     embed.add_field(name="/version", value="Sends the latest version of Roblox.", inline=False)
