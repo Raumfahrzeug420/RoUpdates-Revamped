@@ -4,9 +4,13 @@ Credits go to [MirayXS](https://github.com/MirayXS) https://github.com/MirayXS/R
 
 If you want to contact me: Pakyu!#6228
 
+https://discord.gg/KAaCJ5jb2a
+
 # Changes Made
 
-Instead of comparing the version to the pastebin it will compare to a version text file. This version text file will update automatically. You don't need to make changes to it. Added two slash commands. /version and /ping
+Instead of comparing the version to the pastebin it will compare to a version text file. This version text file will update automatically. You don't need to make changes to it. Added a few slash commands. /version | /ping | /prefix | /help These commands are hybrid commands.
+
+This is also a scaled down version of my [RoUpdates bot](https://discord.gg/KAaCJ5jb2a). 
 
 # SelfHosting from RoUpdates.py
 
